@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Login</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    /* body {
+          background-image: url("image/photo-1544620347-c4fd4a3d5957.jpg");
+          
+          /background-repeat: no-repeat;
+          background-attachment: fixed; 
+          background-size: 100% 100%;
+            
+          } */
+          .bg-image{
+            background-repeat: no-repeat;
+            content: url('assets/images/bus.jpg');
+            height: 603px;
+            width:1365px;
+          }
+    </style>
+</head>
+<body>
+    <div class="bg-image">
+
+    </div>
+ <div class="loginBox">
+
+  <h2>Log In Here</h2>
+<form #regForm="ngForm">
+    <input type="email" name="email" placeholder="Enter Email" required [(ngModel)]="email" #name_ctl="ngModel">
+    <div *ngIf="name_ctl.invalid && (name_ctl.dirty || name_ctl.touched)">
+
+        <div *ngIf="name_ctl.errors">
+
+            Email is required.
+
+        </div>
+     </div>
+
+        <input type="password" name="password" id="password" placeholder="Enter Password" required>
+        <button id="submit" (click)="onSubmit()">Sign In</button>
+</form>
+    <!-- <script>
+        document.querySelector('#submit')
+            .addEventListener('click',()=>{
+                window.location.href = 'main.html'
+            });
+
+        </script> -->
+
+         
+  <router-outlet></router-outlet>
+</div>
+</body>
+</html>

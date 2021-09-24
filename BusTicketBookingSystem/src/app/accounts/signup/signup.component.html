@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Signup</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      .bg-image{
+            background-repeat: no-repeat;
+            content: url('assets/images/bus.jpg');
+            height: 603px;
+            width:1365px;
+          }
+    </style>
+    
+</head>
+<body>
+  <div class="bg-image">
+
+  </div>
+ <div class="loginBox">
+
+  <h4>Sign Up Here</h4>
+  <form method="POST" (ngSubmit)="onSubmit()"> 
+    <input type="text" name="username" placeholder="Enter Username" required>
+    <input type="email" name="email" placeholder="Enter Email" required>
+    <input type="password" name="password" placeholder="Enter Password" required>
+    <input type="password" name="password" placeholder="Conform Password" required>
+    <input type="tel" name="mobilenumber" placeholder="Mobile Number" required>
+    <button id="submit" >submit</button>
+     <!-- <script>
+        document.querySelector('#submit')
+            .addEventListener('click',()=>{
+                window.location.href = 'main.html'
+            });
+        
+        </script> --> 
+    
+  </form>
+</div>
+</body>
+</html>
