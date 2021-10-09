@@ -12,9 +12,7 @@ export class HomeComponent implements OnInit {
   myVar="bus.jpg";
   
   constructor() { }
-  // gotoSignin(){
-  //   this.router.navigate(['/login']);
-  // }
+ 
 
   ngOnInit(): void {
   }

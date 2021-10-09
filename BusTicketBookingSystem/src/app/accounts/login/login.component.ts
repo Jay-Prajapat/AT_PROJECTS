@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -11,25 +11,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email:string;
-  password:string;
-  constructor(private router : Router) 
-  {
-    this.email="";
-    this.password="";
-   }
+  LoginForm: any;
+  submitted = false;
 
-  ngOnInit(): void {
+
+  constructor(private formBuilder: FormBuilder,private router:Router) {
 
   }
-  onSubmit():void{
-    if(this.email==="jayprajapati.1502@gmail.com" && this.password==="1234"){
-    this.router.navigate(['/home']);
-      
+
+
+  get f() { return this.LoginForm.controls; }
+
+  ngOnInit() {
+    this.LoginForm = this.formBuilder.group({
+
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+
+    });
+  }
+
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.LoginForm.invalid) {
+      return;
     }
     else{
-      console.log("Error");
+      this.router.navigate(['/payment']);
     }
   }
-
 }

@@ -15,6 +15,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddDetailsComponent } from './booking/add-details/add-details.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { PaymentSuccessComponent } from './booking/payment-success/payment-success.component';
+import {HttpModule} from '@angular/http';
+import {CommonService} from './common.service';
 
 
 
@@ -42,13 +44,13 @@ import { PaymentSuccessComponent } from './booking/payment-success/payment-succe
     BrowserModule,
     ReactiveFormsModule,
     RouterModule,
-   FormsModule,
-   NgbModule,
-   
+    FormsModule,
+    NgbModule,
+    HttpModule
     
   
   ],
-  providers: [],
+  providers: [CommonService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

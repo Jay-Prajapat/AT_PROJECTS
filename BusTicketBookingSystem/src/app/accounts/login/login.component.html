@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title> Login</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    /* body {
-          background-image: url("image/photo-1544620347-c4fd4a3d5957.jpg");
-          
-          /background-repeat: no-repeat;
-          background-attachment: fixed; 
-          background-size: 100% 100%;
-            
-          } */
-          .bg-image{
+<head>
+    <title> Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+       
+        .bg-image {
             background-repeat: no-repeat;
             content: url('assets/images/bus.jpg');
             height: 603px;
-            width:1365px;
-          }
+            width: 1365px;
+        }
     </style>
 </head>
+
 <body>
     <div class="bg-image">
 
     </div>
- <div class="loginBox">
+    <div class="loginBox">
 
-  <h2>Log In Here</h2>
-<form #regForm="ngForm">
-    <input type="email" name="email" placeholder="Enter Email" required [(ngModel)]="email" #name_ctl="ngModel">
-    <div *ngIf="name_ctl.invalid && (name_ctl.dirty || name_ctl.touched)">
+        <h2>Log In Here</h2>
 
-        <div *ngIf="name_ctl.errors">
 
-            Email is required.
+        <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
 
-        </div>
-     </div>
+            <div class="form-group">
+                <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"/>
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+            </div>
 
-        <input type="password" name="password" id="password" placeholder="Enter Password" required>
-        <button id="submit" (click)="onSubmit()">Sign In</button>
-</form>
-    <!-- <script>
-        document.querySelector('#submit')
-            .addEventListener('click',()=>{
-                window.location.href = 'main.html'
-            });
+            <div class="form-group">
+                <button class="btn btn-primary">Login</button>
+            </div>
 
-        </script> -->
+            <div class="form-group">
+                <p style="color: cyan; font-size:large;">Don't Have an Account?  <a href="/signup" style="font-size: large;">Sign up</a></p>
+            </div>
+        </form>
+    </div>
 
-         
-  <router-outlet></router-outlet>
-</div>
+    
+    <router-outlet></router-outlet>
+
 </body>
+
 </html>
