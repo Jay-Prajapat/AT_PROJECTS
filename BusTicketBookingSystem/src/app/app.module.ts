@@ -15,8 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddDetailsComponent } from './booking/add-details/add-details.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { PaymentSuccessComponent } from './booking/payment-success/payment-success.component';
-import {HttpModule} from '@angular/http';
+import {HttpModule} from '@angular/http'
 import {CommonService} from './common.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -46,7 +47,9 @@ import {CommonService} from './common.service';
     RouterModule,
     FormsModule,
     NgbModule,
-    HttpModule
+    HttpModule,
+    
+    HttpClientModule
     
   
   ],

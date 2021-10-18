@@ -1,35 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+
 import { CommonService } from 'src/app/common.service';
-import { data } from 'jquery';
-// import { data } from 'jquery';
-// import { error } from 'console';
+
 import { IUser } from 'src/app/bususer';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers:  [ CommonService]
 })
 export class SignupComponent implements OnInit {
+  
+  registerForm:any
+  submitted = false;
+  //private usrList : IUser[];
+  err: boolean = false
 
-  // private usrList : IUser[];
 
+  public status:string = ""
+  public usr:IUser = {
+    username:'',
+    email:'',
+    password:'',
+    mobilenumber:'',
+  }
 
-  // private status:string = ""
-  // public usr:IUser = {
-  //   username:'',
-  //   email:'',
-  //   password:'',
-  //   mobilenumber:0,
-  // }
-
-  constructor(private formBuilder: FormBuilder, private usrService: CommonService, private route: ActivatedRoute, private router:Router) { }
-
-    // valbutton = "Save";
-
+  constructor(private formBuilder: FormBuilder,private router:Router,private route:ActivatedRoute,private empSvc:CommonService) { 
+    this.registerForm = new FormGroup({
+      uname: new FormControl('', Validators.required),
+      uemail: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]),
+      upassword: new FormControl('',Validators.required),
+      conf_password: new FormControl('',Validators.required),
+      mobile:new FormControl('',Validators.required)
+    });
+  }
   // MustMatch(controlName: string, matchingControlName: string) {
   //   return (formGroup: FormGroup) => {
   //     const control = formGroup.controls[controlName];
@@ -47,47 +54,35 @@ export class SignupComponent implements OnInit {
   //       matchingControl.setErrors(null);
   //     }
   //   }
-
-
-    // registerForm: any;
-    // submitted = false;
-    // errorMessage = "";
-
-    // this.router.navigate(['']);
-    // this.submitted = true;
-
-    // stop here if form is invalid
-    // if (this.registerForm.invalid) {
-    //   return;
-    // }
   // }
-
-
-  
 
   ngOnInit(){
-
-    // this.registerForm = this.formBuilder.group({
-    //   username: ['', Validators.required],
-    //   email: ['', [Validators.required, Validators.email]],
-    //   password: ['', [Validators.required, Validators.minLength(6)]],
-    //   conf_password: ['', Validators.required],
-    //   mobile: ['',Validators.required,Validators.maxLength(10)]
-    // }, {
-    //   validator: this.MustMatch('password', 'conf_password')
-    // });
-
   }
+  get uname_ctl() { return this.registerForm.get('uname')}
+  get email_ctl() { return this.registerForm.get('uemail')}
+  get password_ctl() { return this.registerForm.get('upassword')}
+  get mobile_ctl() { return this.registerForm.get('mobile')}
+  
+  get conf_password_ctl() { return this.registerForm.get('confirm_password')}
+  get mobile_number_ctl(){return this.registerForm.get('mobile')}
 
-  onRegister(){
-    // this.usrService.postUsers(this.usr).subscribe({
-    //   next:data => this.status = "Can not add user."
-    // })
-    this.router.navigate(['/payment']);
+  onRegister():void{
+    this.usr.username = this.registerForm.get('uname')?.value;
+    this.usr.email = this.registerForm.get('uemail')?.value;
+    this.usr.password= this.registerForm.get('upassword')?.value;
+    this.usr.mobilenumber = this.registerForm.get('mobile')?.value;
+    this.empSvc.postUsers(this.usr).subscribe({
+      next: data => this.status = "New user added.",
+      error: error => this.status = "Cannot add a new employee!"
+    })
+    if(this.status == "New user added.")
+      this.router.navigate(['/']);
+    else
+      this.err = true;
+  
+    
   }
-
-  // get f() { return this.registerForm.controls; }
-
-  // }
 
 }
+
+

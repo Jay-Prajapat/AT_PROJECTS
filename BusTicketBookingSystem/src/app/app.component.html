@@ -26,29 +26,15 @@
         <img src="{{myVar}}">
     </div> -->
     <div class="topnav">
-        <a [routerLink]="['']">Home</a>
-        <a [routerLink]="['/ticket_booking']">Book Ticket</a>
+        <a [routerLink]="['/']">Home</a>
+        <a [routerLink]="['ticket_booking']">Book Ticket</a>
         
         <div class="topnav-right">
-          <a [routerLink]="['/login']">Sign in</a>
-          <a [routerLink]="['/signup']">Sign up</a>
+          <a [routerLink]="['/login']" routerLinkActive="active">Sign in</a>
+          <a [routerLink]="['/signup']" routerLinkActive="active">Sign up</a>
         </div>
-      </div>
-    <!-- <nav>
-        <ul>
-            
-            <li><a [routerLink]="['']">Home</a></li>
-            <li><a [routerLink]="['/ticket_booking']">Booking</a></li>
-
-        </ul>
-        <div class="li_right">
-            <ul>
-                <li style="text-align: right;"><a [routerLink]="['/login']">Sign in</a> </li>
-                <li style="text-align: right;"><a [routerLink]="['/signup']">Sign up</a></li>
-               
-
-            </ul>
-        </div> -->
+    </div>
+    
 
      
             <router-outlet></router-outlet>

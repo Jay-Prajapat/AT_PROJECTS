@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/common.service';
+import { IUser } from 'src/app/bususer';
 
 
 
@@ -12,15 +14,18 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   LoginForm: any;
-  submitted = false;
+  private status : string = ""
+  private userList : IUser[] = []
+  err: boolean = false
 
 
-  constructor(private formBuilder: FormBuilder,private router:Router) {
+  constructor(private formBuilder: FormBuilder,private router:Router,private route:ActivatedRoute,private usrSvc:CommonService) {
 
   }
 
 
-  get f() { return this.LoginForm.controls; }
+  get email_ctl() { return this.LoginForm.get('email')}
+  get password_ctl() { return this.LoginForm.get('password')}
 
   ngOnInit() {
     this.LoginForm = this.formBuilder.group({
@@ -33,14 +38,16 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.LoginForm.invalid) {
-      return;
-    }
-    else{
-      this.router.navigate(['/payment']);
-    }
+    this.usrSvc.getUsers().subscribe(data => this.userList = data)
+    this.userList.forEach(element => {
+      if(element.email == this.LoginForm.get('email')?.value && element.password == this.LoginForm.get('password')?.value)
+      {
+        
+        this.router.navigate(['/']);
+      }
+      else
+        this.err = true;
+    });
+    
   }
 }

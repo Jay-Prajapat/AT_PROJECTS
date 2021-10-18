@@ -8,15 +8,18 @@ import { BusbookingComponent } from './booking/busbooking/busbooking.component';
 import { AddDetailsComponent } from './booking/add-details/add-details.component';
 import { PaymentComponent } from './booking/payment/payment.component';
 import { PaymentSuccessComponent } from './booking/payment-success/payment-success.component';
+
 const routes: Routes = [
+  
   {path:'login',component:LoginComponent},
-  {path:'',component:HomeComponent},
+  
   {path:'signup',component:SignupComponent},
   {path:'ticket_booking',component:TicketBookingComponent},
   {path:'bus_book',component:BusbookingComponent},
   {path:'details',component:AddDetailsComponent},
   {path:'payment',component:PaymentComponent},
-  {path:'payment-success',component:PaymentSuccessComponent}
+  {path:'payment-success',component:PaymentSuccessComponent},
+  {path:'',component:HomeComponent}
   
 ];
 

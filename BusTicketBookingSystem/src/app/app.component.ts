@@ -8,5 +8,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'BusTicketBookingSystem';
+  constructor(private router:Router) { 
+    
+  }
+
+  // onSignup(){
+  //   this.router.navigate(['/signup']);
+  // }
 }
 

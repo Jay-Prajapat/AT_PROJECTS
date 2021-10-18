@@ -6,7 +6,6 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-       
         .bg-image {
             background-repeat: no-repeat;
             content: url('assets/images/bus.jpg');
@@ -28,31 +27,43 @@
         <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
 
             <div class="form-group">
-                <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email" />
-                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                <input type="email" class="form-control" formControlName="email" id="floatingInput"
+                    placeholder="Email address">
+
+                <div *ngIf="email_ctl?.invalid && (email_ctl?.dirty || email_ctl?.touched)">
+                    <div *ngIf="email_ctl?.errors?.required" class="text-danger">
+                        Email is required.
+                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Password"/>
-                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
-                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                <input type="password" class="form-control" formControlName="password" name="password"
+                    id="floatingPassword" placeholder="Password">
+
+                <div *ngIf="password_ctl?.invalid && (password_ctl?.dirty || password_ctl?.touched)">
+                    <div *ngIf="password_ctl?.errors?.required" class="text-danger">
+                        Password is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <div *ngIf = "err" class="text-danger">
+                    Please enter valid details.
                 </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!LoginForm.valid">Login</button>
             </div>
 
             <div class="form-group">
-                <p style="color: cyan; font-size:large;">Don't Have an Account?  <a href="/signup" style="font-size: large;">Sign up</a></p>
+                <p style="color: cyan; font-size:large;">Don't Have an Account? <a href="/signup"
+                        style="font-size: large;">Sign up</a></p>
             </div>
         </form>
     </div>
 
-    
+
     <router-outlet></router-outlet>
 
 </body>

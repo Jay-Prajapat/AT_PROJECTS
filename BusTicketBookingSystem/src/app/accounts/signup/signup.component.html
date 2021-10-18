@@ -25,50 +25,83 @@
   <div class="loginBox">
 
     <h4>Sign Up Here</h4>
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
       <div class="form-group">
-        <input type="text" id="uname" name="uname"  placeholder="Enter Username"  required>
+        {{status}}
+        <input type="text" id="u_uname" name="uname"  formControlName="uname" placeholder="Enter Username"  required >
           <!-- <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-          <div *ngIf="f.username.errors.required">UserName is required</div> -->
-        <!-- </div> -->
+          <div *ngIf="f.username.errors.required">UserName is required</div>
+        </div> -->
+        <div *ngIf = "uname_ctl?.invalid && (uname_ctl?.dirty || uname_ctl?.touched)">
+          <div *ngIf = "uname_ctl?.errors?.required" class="text-danger">
+              UserName is required.
+          </div>
+      </div>
       </div>
 
 
       <div class="form-group">
-        <input type="email" name="uemail" id="uemail"   placeholder="Enter Email" required>
-        <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="f.email.errors.required">Email is required</div>
-          <div *ngIf="f.email.errors.email">Email must be a valid email address</div> -->
-        <!-- </div> -->
+        <input type="email" name="uemail" id="u_uemail"  formControlName="uemail" placeholder="Enter Email" required >
+        <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div> -->
+        <div *ngIf = "email_ctl?.invalid && (email_ctl?.dirty || email_ctl?.touched)">
+          <div *ngIf = "email_ctl?.errors?.required" class="text-danger">
+              Email is required.
+          </div>
+          <div *ngIf = "email_ctl?.errors?.pattern" class="text-danger">
+              Please enter valid email.
+          </div>
+      </div>
       </div>
 
       <div class="form-group">
-        <input type="password" id="upassword" name="upassword"  placeholder="Enter Password" required>
-        <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div> -->
-        <!-- </div> -->
+        <input type="password" id="u_upassword" name="upassword"  formControlName="upassword"  placeholder="Enter Password" required >
+        <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div> -->
+        <div *ngIf = "password_ctl?.invalid && (password_ctl?.dirty || password_ctl?.touched)">
+          <div *ngIf = "password_ctl?.errors?.required" class="text-danger">
+              Password is required.
+          </div>
+      </div>
+        
       </div>
 
       <div class="form-group">
-        <input type="password" name="conf_password" id="conf_password"  placeholder="Confirm Password" required>
-        <!-- <div *ngIf="submitted && f.conf_password.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="f.conf_password.errors.required">Confirm Password is required</div>
-          <div *ngIf="f.conf_password.errors.mustMatch">Passwords must match</div> -->
-        <!-- </div> -->
+        <input type="password" name="conf_password" id="u_conf_password"  formControlName="conf_password" placeholder="Confirm Password" required>
+        <!-- <div *ngIf="submitted && f.conf_password.errors" class="invalid-feedback"> 
+          <div *ngIf="f.conf_password.errors.required">Confirm Password is required</div>
+          <div *ngIf="f.conf_password.errors.mustMatch">Passwords must match</div>
+        </div> -->
+        <div *ngIf = "conf_password_ctl?.invalid && (conf_password_ctl?.dirty || conf_password_ctl?.touched)">
+          <div *ngIf = "conf_password_ctl?.errors?.required" class="text-danger">
+              Confirm Password is required.
+          </div>
+      </div>
       </div>
 
       <div class="form-group">
-        <input type="tel" name="mobile" id="mobile"  placeholder="Mobile Number" pattern="[0-9]{5}[0-9]{5}" required>
-        <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback"> -->
-          <!-- <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
-          <div *ngIf="f.mobile.errors.maxlength">Mobile Number be at least 10 numbers</div> -->
-        <!-- </div> -->
+        <input type="tel" name="mobile" id="u_mobile"  placeholder="Mobile Number" formControlName="mobile" pattern="[0-9]{5}[0-9]{5}" required >
+        <!-- <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback"> 
+          <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+          <div *ngIf="f.mobile.errors.maxlength">Mobile Number be at least 10 numbers</div> 
+        </div> -->
+        <div *ngIf = "mobile_number_ctl?.invalid && (mobile_number_ctl?.dirty || mobile_number_ctl?.touched)">
+          <div *ngIf = "mobile_number_ctl?.errors?.required" class="text-danger">
+              Mobile is required.
+          </div>
+          <div *ngIf = "mobile_number_ctl?.errors?.pattern" class="text-danger">
+            Please enter valid mobile.
+        </div>
       </div>
-
+      </div>
+      
 
       <div class="form-group">
-        <button  class="btn btn-primary" (click)="onRegister()">Register</button>
+        <button type="submit" autocomplete="off"  class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
     </div>
 
     <div class="fomr-group">
@@ -76,7 +109,7 @@
     </div>
 
     </form>
-    <!-- <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet>
   </div>
   
 </body>
