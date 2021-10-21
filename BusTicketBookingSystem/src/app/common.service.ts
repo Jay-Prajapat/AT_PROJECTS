@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 // import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs';
 import { HttpClient,HttpHeaders,HttpResponse } from '@angular/common/http';
+import { IBus } from 'src/busdetail';
 
 import { IUser } from './bususer';
 
@@ -22,6 +23,7 @@ export class CommonService {
  
 
   private url = "http://localhost:8000/usr"
+  private url2="http://localhost:8000/busdetail"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -33,4 +35,7 @@ export class CommonService {
     return this.httpClient.post<any>(this.url,usr,httpOptions)
   }
   
+  getBuses():Observable<IBus[]>{
+    return this.httpClient.get<IBus[]>(this.url2)
+  }
 }

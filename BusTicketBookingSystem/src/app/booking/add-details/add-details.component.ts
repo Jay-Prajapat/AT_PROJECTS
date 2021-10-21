@@ -57,9 +57,9 @@ export class AddDetailsComponent implements OnInit {
       return;
     }
     else{
-      this.router.navigate(['/payment'])
+      this.router.navigate(['/bus_book'])
     }
   }
-
+  
 
 }

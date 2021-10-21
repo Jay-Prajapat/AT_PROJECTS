@@ -20,6 +20,6 @@ export class BusbookingComponent implements OnInit {
   ngOnInit(): void {
   }
   add_details() {
-    this.router.navigate(['/details']);
+    this.router.navigate(['/payment']);
   }
 }
