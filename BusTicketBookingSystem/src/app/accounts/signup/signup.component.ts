@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
     mobilenumber:'',
   }
 
-  constructor(private formBuilder: FormBuilder,private router:Router,private route:ActivatedRoute,private empSvc:CommonService) { 
+  constructor(private formBuilder: FormBuilder,private router:Router,private route:ActivatedRoute,private usrSvc:CommonService) { 
     this.registerForm = new FormGroup({
       uname: new FormControl('', Validators.required),
       uemail: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")]),
@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
     this.usr.email = this.registerForm.get('uemail')?.value;
     this.usr.password= this.registerForm.get('upassword')?.value;
     this.usr.mobilenumber = this.registerForm.get('mobile')?.value;
-    this.empSvc.postUsers(this.usr).subscribe({
+    this.usrSvc.postUsers(this.usr).subscribe({
       next: data => this.status = "New user added.",
       error: error => this.status = "Cannot add a new employee!"
     })

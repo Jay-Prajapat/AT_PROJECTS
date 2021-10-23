@@ -33,25 +33,57 @@ bus=[
   {
     arrival_time:"5pm", 
     departure_time:"7pm",
-    source:"nadiad",
-    dest:"surat",
+    source:"Nadiad",
+    dest:"Surat",
     type:"Express" ,
     price:200
   },
   {
   arrival_time:"6pm", 
   departure_time:"9pm",
-  source:"surat",
-  dest:"nadiad" ,
+  source:"Surat",
+  dest:"Nadiad" ,
   type:"Express" ,
   price:200
   },
   {
+  arrival_time:"2pm", 
+  departure_time:"4pm",
+  source:"Surat",
+  dest:"Vyara" ,
+  type:"Local" ,
+  price:70
+  },
+  {
+  arrival_time:"9am", 
+  departure_time:"4pm",
+  source:"Vyara",
+  dest:"Nadiad" ,
+  type:"Express" ,
+  price:500
+  },
+  {
+  arrival_time:"6pm", 
+  departure_time:"7:30pm",
+  source:"Ahmedabad",
+  dest:"Nadiad" ,
+  type:"Local" ,
+  price:50
+  },
+  {
+  arrival_time:"12pm", 
+  departure_time:"7pm",
+  source:"Surat",
+  dest:"Ahmedabad" ,
+  type:"Express" ,
+  price:500
+  },
+  {
     arrival_time:"6pm", 
     departure_time:"10pm",
-    source:"ahemadabad",
-    dest:"rajkot" ,
-    type:"local" ,
+    source:"Ahemadabad",
+    dest:"Vyara" ,
+    type:"Local" ,
     price:300
   }
 ]

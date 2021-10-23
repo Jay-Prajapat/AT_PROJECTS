@@ -6,6 +6,9 @@ body{
     color: chartreuse;
     padding-right: 50px;
 }
+.td-body{
+  padding-right: 50px;
+}
 .book-bus{
     padding-left: 1000px;
 }

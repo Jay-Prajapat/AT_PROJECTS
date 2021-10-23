@@ -9,6 +9,8 @@ import { HttpClient,HttpHeaders,HttpResponse } from '@angular/common/http';
 import { IBus } from 'src/busdetail';
 
 import { IUser } from './bususer';
+import { IDetails } from './details';
+import { IUserDetails } from './userdetail';
 
 export const httpOptions = {
   headers : new HttpHeaders({
@@ -23,7 +25,9 @@ export class CommonService {
  
 
   private url = "http://localhost:8000/usr"
-  private url2="http://localhost:8000/busdetail"
+  private url2 = "http://localhost:8000/busdetail"
+  private url3 = "http://localhost:8000/bookingdetail"
+  private url4 = "http://localhost:8000/userdetail"
 
   constructor(private httpClient: HttpClient) { }
 
@@ -38,4 +42,14 @@ export class CommonService {
   getBuses():Observable<IBus[]>{
     return this.httpClient.get<IBus[]>(this.url2)
   }
+
+  postDetails(bookingdetail:IDetails):Observable<any>{
+    return this.httpClient.post<any>(this.url3,bookingdetail,httpOptions)
+  }
+  postUserDetails(userdetail:IUserDetails):Observable<any>{
+    return this.httpClient.post<any>(this.url4,userdetail,httpOptions)
+  }
+  
+  
+
 }

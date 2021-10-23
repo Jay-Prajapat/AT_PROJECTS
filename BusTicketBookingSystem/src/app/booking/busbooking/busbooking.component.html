@@ -5,23 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 
 <body>
-    <form>
+    {{status}}
+    <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
+        
+        <h3 style="margin-left: 5px;"><i class="bi bi-envelope-fill">&nbsp;&nbsp;</i>Contact Details</h3>
         <div class="details">
-            <label for="email">Email</label><br>
-        <input type="email" id="email" name="email" placeholder="Email"><br>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" formControlName="email" placeholder="Email"><br>
+        <div *ngIf = "email_ctl?.invalid && (email_ctl?.dirty || email_ctl?.touched)">
+            <div *ngIf = "email_ctl?.errors?.required" class="text-danger">
+                Email is required.
+            </div>
+            <div *ngIf = "email_ctl?.errors?.pattern" class="text-danger">
+                Please enter valid email.
+            </div>
+        </div>
+
         <label for="mo_number">Phone</label><br>
-        <input type="number" id="mo_number" name="mo_number" placeholder="Phone"><br>
-        <label for="no_of_seat">Number of seats</label><br>
-        <input type="number" id="no_of_seat" name="no_of_seat" placeholder="Seats"><br>
+        <input type="number" id="mo_number" name="mo_number" formControlName="mo_number" placeholder="Phone"><br>
+        <div *ngIf = "mobile_number_ctl?.invalid && (mobile_number_ctl?.dirty || mobile_number_ctl?.touched)">
+            <div *ngIf = "mobile_number_ctl?.errors?.required" class="text-danger">
+                Mobile is required.
+            </div>
+            <div *ngIf = "mobile_number_ctl?.errors?.pattern" class="text-danger">
+              Please enter valid mobile.
+          </div>
+        </div>
+        
 
 
 
 
-        <button type="submit" id="add_details" (click)="add_details()">PROCEED TO PAY</button>
+        <button type="submit" id="add_details" [disabled]="!userDetailForm.valid">PROCEED TO PAY</button>
         
         </div>
         

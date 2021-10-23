@@ -38,6 +38,22 @@ function mongoConnected() {
         type:String,
     }, {collection: 'busdetail'});
     var Bus = mongoose.model("Bus",busdetailsSchema);
+    
+    
+    var bookingDetailSchema = new mongoose.Schema({
+        name:String,
+        age:Number,
+        total_price:Number,
+    }, {collection: 'bookingdetail'});
+    var Details = mongoose.model("Details",bookingDetailSchema);
+
+    var userDetailSchema = new mongoose.Schema({
+        email:String,
+        mo_number:Number,
+    }, {collection: 'userdetail'});
+    var UserDetail = mongoose.model("UserDetail",userDetailSchema);
+
+
 
     app.get("/usr", (req, res) => {
         Usr.find(function (err, bususers) {
@@ -61,6 +77,28 @@ function mongoConnected() {
         });
     });
 
+    app.get("/bookingdetail",(req,res)=>{
+        Details.find(function(err,bookingdetail){
+            if(err) return res.status(400).json({error: 'Can not get Booking Details! '})
+            return res.status(200).json(bookingdetail)
+        });
+    });
+
+    app.post("/bookingdetail", (req, res) => {
+        var bookingData = new Details(req.body);
+        bookingData.save(function (err) {
+            if (err) return res.status(400).json({ error: 'Can not add Booking Details! ' })
+            return res.status(200).json({ message: 'Booking Details added sucessfully! ' })
+        });
+    });
+
+    app.post("/userdetail", (req, res) => {
+        var userData = new UserDetail(req.body);
+        userData.save(function (err) {
+            if (err) return res.status(400).json({ error: 'Can not add User Details! ' })
+            return res.status(200).json({ message: 'User Details added sucessfully! ' })
+        });
+    });
     
 }
 

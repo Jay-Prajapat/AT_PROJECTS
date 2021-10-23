@@ -47,6 +47,7 @@
     {
         font-size:25px;
         padding-top:25px;
+        padding-bottom: 40px;
     }
 
     .content a
@@ -54,6 +55,7 @@
         width:200px;
         height:35px;
         color:#fff;
+        padding-top: 15px;
         border-radius:30px;
         padding:5px 10px;
         background:rgba(255,102,0,1);
